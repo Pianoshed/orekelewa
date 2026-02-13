@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Orekelewa 💕</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background:
+                linear-gradient(135deg, rgba(60, 30, 50, 0.85) 0%, rgba(40, 20, 40, 0.9) 100%),
+                url('https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=1920&q=80') center/cover fixed,
+                #2a1a2e;
+            min-height: 100vh;
+            color: #f5e6e8;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(139, 69, 19, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(72, 52, 72, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                url('https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=400&q=80'),
+                url('https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=400&q=80');
+            background-position:
+                10% 20%,
+                90% 80%;
+            background-size:
+                250px 250px,
+                200px 200px;
+            background-repeat: no-repeat;
+            opacity: 0.08;
+            pointer-events: none;
+            z-index: 0;
+            animation: float-flowers 20s ease-in-out infinite;
+        }
+
+        @keyframes float-flowers {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+
+        /* Preloader Styles */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                linear-gradient(135deg, rgba(60, 30, 50, 0.95) 0%, rgba(40, 20, 40, 0.95) 100%),
+                url('https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=1920&q=80') center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease-out;
+        }
+
+        .preloader.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .gift-box-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+
+        .gift-box {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 120px;
+        }
+
+        .box-bottom {
+            position: absolute;
+            bottom: 0;
+            width: 150px;
+            height: 100px;
+            background: linear-gradient(145deg, #ff1744, #c2185b);
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .box-ribbon-v {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 100px;
+            background: linear-gradient(145deg, #ffd700, #ffab00);
+            z-index: 2;
+        }
+
+        .box-ribbon-h {
+            position: absolute;
+            top: 40%;
+            left: 0;
+            width: 150px;
+            height: 20px;
+            background: linear-gradient(145deg, #ffd700, #ffab00);
+            z-index: 1;
+        }
+
+        .box-lid {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 160px;
+            height: 30px;
+            background: linear-gradient(145deg, #d81b60, #880e4f);
+            border-radius: 5px 5px 0 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: lid-open 2s ease-in-out 1s forwards;
+            transform-origin: bottom center;
+        }
+
+        .bow {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 40px;
+            z-index: 3;
+        }
+
+        .bow::before,
+        .bow::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #ffd700;
+            border-radius: 50% 50% 0 50%;
+        }
+
+        .bow::before {
+            left: 0;
+            transform: rotate(-45deg);
+        }
+
+        .bow::after {
+            right: 0;
+            transform: rotate(45deg);
+        }
+
+        .bow-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 15px;
+            height: 15px;
+            background: #ffab00;
+            border-radius: 50%;
+        }
+
+        @keyframes lid-open {
+            0% {
+                transform: translateX(-50%) rotateX(0deg);
+            }
+
+            100% {
+                transform: translateX(-50%) rotateX(-120deg) translateY(-50px);
+                opacity: 0;
+            }
+        }
+
+        .flowers-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .flower {
+            position: absolute;
+            font-size: 30px;
+            opacity: 0;
+            animation: flower-burst 2s ease-out forwards;
+        }
+
+        @keyframes flower-burst {
+            0% {
+                bottom: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) scale(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                bottom: var(--end-y);
+                left: var(--end-x);
+                transform: translate(-50%, -50%) scale(1.5) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .love-rhythm {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+            opacity: 0;
+            animation: rhythm-pulse 3s ease-in-out 1.5s forwards;
+            text-align: center;
+            width: 80%;
+        }
+
+        @keyframes rhythm-pulse {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+
+            20% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+
+            40% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            60% {
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+
+            80% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1.5);
+            }
+        }
+
+        .love-rhythm-small {
+            font-size: 0.6em;
+        }
+
+        .main-content {
+            opacity: 0;
+            transition: opacity 1s ease-in;
+        }
+
+        .main-content.show {
+            opacity: 1;
+        }
+
+        /* Floating Flower Petals */
+        .floating-petals {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .petal {
+            position: absolute;
+            font-size: 20px;
+            animation: petal-fall 15s infinite linear;
+            opacity: 0;
+            filter: brightness(0.8);
+        }
+
+        @keyframes petal-fall {
+            0% {
+                top: -10%;
+                opacity: 0;
+                transform: translateX(0) rotate(0deg);
+            }
+
+            10% {
+                opacity: 0.5;
+            }
+
+            90% {
+                opacity: 0.5;
+            }
+
+            100% {
+                top: 110%;
+                opacity: 0;
+                transform: translateX(100px) rotate(360deg);
+            }
+        }
+
+        /* Enhanced container with better contrast */
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 18px;
+            animation: float 15s infinite;
+            opacity: 0;
+            filter: brightness(0.9);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px 30px;
+            position: relative;
+        }
+
+        header::before {
+            content: '🌹';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2em;
+            opacity: 0.7;
+            animation: float-gentle 3s ease-in-out infinite;
+        }
+
+        @keyframes float-gentle {
+
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            50% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+
+        .main-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.2em;
+            font-weight: 400;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #d4a5a5, #ffd4d4, #d4a5a5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            animation: glow-soft 3s ease-in-out infinite alternate;
+            text-shadow: none;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .main-title::before,
+        .main-title::after {
+            content: '✦';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.4em;
+            color: #d4a5a5;
+            opacity: 0.6;
+        }
+
+        .main-title::before {
+            left: -30px;
+        }
+
+        .main-title::after {
+            right: -30px;
+        }
+
+        @keyframes glow-soft {
+            from {
+                filter: brightness(1);
+            }
+
+            to {
+                filter: brightness(1.2);
+            }
+        }
+
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2em;
+            font-style: italic;
+            animation: fadeInUp 1s ease-out;
+            color: #d4a5a5;
+            letter-spacing: 1px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .pet-names {
+            background: rgba(40, 30, 35, 0.7);
+            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            padding: 25px 15px;
+            margin: 30px 0;
+            border: 1px solid rgba(212, 165, 165, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .pet-names h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #d4a5a5;
+        }
+
+        .names-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .name-tag {
+            background: rgba(80, 50, 60, 0.5);
+            padding: 12px 8px;
+            border-radius: 10px;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05em;
+            transition: transform 0.3s ease, background 0.3s ease;
+            border: 1px solid rgba(212, 165, 165, 0.2);
+        }
+
+        .name-tag:hover {
+            transform: translateY(-3px) scale(1.02);
+            background: rgba(100, 60, 80, 0.6);
+            box-shadow: 0 5px 15px rgba(212, 165, 165, 0.3);
+        }
+
+        .poem-section {
+            background: rgba(40, 30, 35, 0.7);
+            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            padding: 30px 20px;
+            margin: 30px 0;
+            border: 1px solid rgba(212, 165, 165, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .poem-section h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2em;
+            margin-bottom: 25px;
+            text-align: center;
+            color: #d4a5a5;
+        }
+
+        .poem {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15em;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            padding: 18px;
+            background: rgba(60, 40, 50, 0.4);
+            border-radius: 12px;
+            border-left: 3px solid #c9a0a0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .poem-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4em;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #e8c4c4;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .photo-frame {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+            background: rgba(60, 40, 50, 0.4);
+            aspect-ratio: 1;
+            border: 2px solid rgba(212, 165, 165, 0.2);
+        }
+
+        .photo-frame:hover {
+            transform: scale(1.03) rotate(1deg);
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            background: linear-gradient(135deg, #6b4d57 0%, #4a3540 100%);
+        }
+
+        .gallery-note {
+            text-align: center;
+            margin-top: 20px;
+            font-style: italic;
+            color: #d4a5a5;
+            font-size: 0.95em;
+        }
+
+        .love-message {
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+            font-size: 1.4em;
+            padding: 30px 15px;
+            font-style: italic;
+            animation: pulse 2s ease-in-out infinite;
+            color: #d4a5a5;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        footer {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 1.1em;
+            color: #d4a5a5;
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5em;
+            }
+
+            .main-title::before,
+            .main-title::after {
+                display: none;
+            }
+
+            .subtitle {
+                font-size: 1em;
+            }
+
+            .poem-section,
+            .pet-names {
+                padding: 20px 15px;
+            }
+
+            .pet-names h2,
+            .poem-section h2 {
+                font-size: 1.6em;
+            }
+
+            .names-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 10px;
+            }
+
+            .name-tag {
+                font-size: 0.95em;
+                padding: 10px 6px;
+            }
+
+            .poem {
+                font-size: 1.05em;
+                padding: 15px;
+            }
+
+            .poem-title {
+                font-size: 1.25em;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .love-message {
+                font-size: 1.2em;
+                padding: 25px 15px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            header {
+                padding: 30px 15px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 2em;
+            }
+
+            .subtitle {
+                font-size: 0.9em;
+            }
+
+            .names-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .poem {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="gift-box-container">
+            <div class="gift-box">
+                <div class="box-lid">
+                    <div class="bow">
+                        <div class="bow-center"></div>
+                    </div>
+                </div>
+                <div class="box-ribbon-v"></div>
+                <div class="box-ribbon-h"></div>
+                <div class="box-bottom"></div>
+            </div>
+            <div class="flowers-container" id="flowersContainer"></div>
+            <div class="love-rhythm" id="loveRhythm">
+                💕 For My Orekelewa 💕<br>
+                <small class="love-rhythm-small">Mo nife re</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content" id="mainContent">
+        <div class="floating-petals" id="petals"></div>
+        <div class="floating-hearts" id="hearts"></div>
+
+        <div class="container">
+            <header>
+                <h1 class="main-title">Orekelewa Mi 💖</h1>
+                <p class="subtitle">My Beautiful One, My Heart's Desire</p>
+            </header>
+
+            <section class="pet-names">
+                <h2>✨ Oruko Ife Mi (My Love Names) ✨</h2>
+                <div class="names-grid">
+                    <div class="name-tag">💕 Orekelewa</div>
+                    <div class="name-tag">🌟 Adunni</div>
+                    <div class="name-tag">💎 Ashake</div>
+                    <div class="name-tag">🌺 Ahabi</div>
+                    <div class="name-tag">✨ Aduke</div>
+                    <div class="name-tag">🌹 Amoke</div>
+                    <div class="name-tag">💝 Apeke</div>
+                    <div class="name-tag">🦋 Omoge</div>
+                    <div class="name-tag">🌸 Ayanfe</div>
+                    <div class="name-tag">💖 Ololufe</div>
+                    <div class="name-tag">🌷 Ife Mi</div>
+                    <div class="name-tag">✨ Omowunmi</div>
+                </div>
+            </section>
+
+            <section class="poem-section">
+                <h2>📜 Ewi Ife (Love Poems)</h2>
+
+                <div class="poem">
+                    <div class="poem-title">Orekelewa Mi</div>
+                    Orekelewa mi, arewa to ju arewa lo<br>
+                    Oju re dun bi oyin, eti re dara bi fadaka<br>
+                    Bi mo ba wo o, okan mi a ma jo<br>
+                    Ife mi fun e ko ni le tan lai lai<br><br>
+
+                    O joko soke bi osumare l'oke<br>
+                    Ewa re ko l'apeere laye yi<br>
+                    Bi osupa ti n tan l'oru<br>
+                    Be e ni iwo n tan ninu okan mi<br><br>
+
+                    <em>Translation:</em><br>
+                    <em>My beautiful one, beauty beyond compare<br>
+                        Your eyes sweet as honey, your ears precious as silver<br>
+                        When I see you, my heart dances<br>
+                        My love for you will never end</em>
+                </div>
+
+                <div class="poem">
+                    <div class="poem-title">Ayanfe Mi</div>
+                    Ayanfe mi, o ti gba okan mi<br>
+                    Ife to wa laarin wa, o dara pupo<br>
+                    Bi omi ti n san l'odo<br>
+                    Be e ni ife mi n san fun e<br><br>
+
+                    Iwo nikan l'emi fe<br>
+                    Iwo nikan ni mo mo<br>
+                    L'aiye at'orun, iwo l'emi yoo ma fe<br>
+                    Titi aye ti orun<br><br>
+
+                    <em>Translation:</em><br>
+                    <em>My chosen one, you've captured my heart<br>
+                        The love between us is so beautiful<br>
+                        Like water flowing in a stream<br>
+                        So does my love flow for you</em>
+                </div>
+
+                <div class="poem">
+                    <div class="poem-title">Omoge Adun</div>
+                    Omoge adun, oro mi o le tan<br>
+                    Nitori pe, ife to wa ninu okan mi fun e<br>
+                    Ko ni tan rara<br>
+                    Bi oorun ti n yo l'owuro<br>
+                    Be e ni oju mi n yo nitori re<br><br>
+
+                    Ife wa yoo duro titi lai<br>
+                    Ko si ohun to le ya wa<br>
+                    Emi at'iwo, iwo at'emi<br>
+                    La o ma wa titi aye<br><br>
+
+                    <em>Translation:</em><br>
+                    <em>Sweet beautiful one, my words cannot end<br>
+                        Because the love in my heart for you<br>
+                        Will never finish<br>
+                        As the sun rises in the morning<br>
+                        So does my face brighten because of you</em>
+                </div>
+            </section>
+
+            <section class="pet-names">
+                <h2>📸 Awon Aworan Wa (Our Pictures)</h2>
+                <div class="gallery">
+                    <div class="photo-frame">
+                        <div class="photo-placeholder">💑</div>
+                    </div>
+                    <div class="photo-frame">
+                        <div class="photo-placeholder">💕</div>
+                    </div>
+                    <div class="photo-frame">
+                        <div class="photo-placeholder">❤️</div>
+                    </div>
+                    <div class="photo-frame">
+                        <div class="photo-placeholder">💖</div>
+                    </div>
+                </div>
+                <p class="gallery-note">
+                    (Replace the emojis above with your photos - see instructions in README)
+                </p>
+            </section>
+
+            <div class="love-message">
+                💝 Mo nife re, Orekelewa mi 💝<br>
+                <small>I love you, my beautiful one</small>
+            </div>
+
+            <footer>
+                Forever yours,<br>
+                With all my heart ❤️
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        // Preloader animations
+        const flowers = ['🌹', '🌺', '🌸', '🌼', '🌻', '💐', '🌷', '🏵️'];
+        const flowersContainer = document.getElementById('flowersContainer');
+
+        // Create and animate flowers bursting from the box
+        function createFlowers() {
+            setTimeout(() => {
+                for (let i = 0; i < 20; i++) {
+                    setTimeout(() => {
+                        const flower = document.createElement('div');
+                        flower.className = 'flower';
+                        flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+
+                        const angle = (Math.PI * 2 * i) / 20;
+                        const distance = 40 + Math.random() * 60;
+                        const endX = 50 + Math.cos(angle) * distance;
+                        const endY = 50 - Math.sin(angle) * distance;
+
+                        flower.style.setProperty('--end-x', endX + '%');
+                        flower.style.setProperty('--end-y', endY + '%');
+                        flower.style.animationDelay = (i * 0.05) + 's';
+
+                        flowersContainer.appendChild(flower);
+                    }, i * 50);
+                }
+            }, 1000);
+        }
+
+        // Initialize preloader
+        createFlowers();
+
+        // Hide preloader and show main content after animation
+        setTimeout(() => {
+            const preloader = document.getElementById('preloader');
+            const mainContent = document.getElementById('mainContent');
+
+            preloader.classList.add('fade-out');
+            mainContent.classList.add('show');
+
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 1000);
+        }, 4500);
+
+        // Create floating hearts
+        const heartsContainer = document.getElementById('hearts');
+        const heartSymbols = ['❤️', '💕', '💖', '💗', '💝', '💘'];
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            heartsContainer.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 20000);
+        }
+
+        // Create hearts periodically
+        setInterval(createHeart, 1000);
+
+        // Create initial hearts
+        for (let i = 0; i < 10; i++) {
+            setTimeout(createHeart, i * 500);
+        }
+
+        // Create floating flower petals
+        const petalsContainer = document.getElementById('petals');
+        const petalSymbols = ['🌸', '🌺', '🌹', '🌼', '🌷', '💮'];
+
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            petal.textContent = petalSymbols[Math.floor(Math.random() * petalSymbols.length)];
+            petal.style.left = Math.random() * 100 + '%';
+            petal.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            petal.style.animationDelay = Math.random() * 5 + 's';
+            petalsContainer.appendChild(petal);
+
+            setTimeout(() => {
+                petal.remove();
+            }, 20000);
+        }
+
+        // Create petals periodically
+        setInterval(createPetal, 1500);
+
+        // Create initial petals
+        for (let i = 0; i < 8; i++) {
+            setTimeout(createPetal, i * 700);
+        }
+    </script>
+</body>
+
+</html>
