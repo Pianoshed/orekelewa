@@ -618,7 +618,24 @@
             margin-top: 20px;
             font-style: italic;
             color: #d4a5a5;
-            font-size: 0.95em;
+            font-size: 0.85em;
+            line-height: 1.6;
+            padding: 15px;
+            background: rgba(60, 40, 50, 0.3);
+            border-radius: 10px;
+            border-left: 3px solid #c9a0a0;
+        }
+
+        .gallery-note strong {
+            color: #e8c4c4;
+            font-style: normal;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .love-message {
@@ -849,21 +866,31 @@
             <section class="pet-names">
                 <h2>📸 Awon Aworan Wa (Our Pictures)</h2>
                 <div class="gallery">
+                    <!-- PHOTO 1: Make sure you have photo1.jpg in your images folder -->
                     <div class="photo-frame">
-                        <div class="photo-placeholder">💑</div>
+                        <img src="images/ore1.jpeg" alt="Our beautiful moment" class="gallery-image">
                     </div>
+
+                    <!-- PHOTO 2: Make sure you have photo2.jpg in your images folder -->
                     <div class="photo-frame">
-                        <div class="photo-placeholder">💕</div>
+                        <img src="images/ore2.jpeg" alt="Sweet memories" class="gallery-image">
                     </div>
+
+                    <!-- PHOTO 3: Make sure you have photo3.jpg in your images folder -->
                     <div class="photo-frame">
-                        <div class="photo-placeholder">❤️</div>
+                        <img src="images/ore3.jpeg" alt="Love and joy" class="gallery-image">
                     </div>
+
+                    <!-- PHOTO 4: Make sure you have photo4.jpg in your images folder -->
                     <div class="photo-frame">
-                        <div class="photo-placeholder">💖</div>
+                        <img src="images/ore4.jpeg" alt="Together forever" class="gallery-image">
                     </div>
                 </div>
                 <p class="gallery-note">
-                    (Replace the emojis above with your photos - see instructions in README)
+                    💡 <strong>Your photos should be named:</strong> photo1.jpg, photo2.jpg, photo3.jpg, photo4.jpg in
+                    the 'images' folder.<br>
+                    You can use any image format (.jpg, .jpeg, .png) - just update the file extensions in the code above
+                    to match your files.
                 </p>
             </section>
 
