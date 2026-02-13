@@ -514,7 +514,25 @@
             font-size: 1.8em;
             margin-bottom: 20px;
             text-align: center;
-            color: #d4a5a5;
+            background: linear-gradient(90deg, #d4a5a5, #8ab4f8, #ba55d3, #d4a5a5);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            animation: gradient-shift 6s ease-in-out infinite;
+        }
+
+        @keyframes gradient-shift {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
         }
 
         .names-grid {
@@ -531,14 +549,122 @@
             text-align: center;
             font-family: 'Playfair Display', serif;
             font-size: 1.05em;
-            transition: transform 0.3s ease, background 0.3s ease;
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
             border: 1px solid rgba(212, 165, 165, 0.2);
+            position: relative;
+            overflow: hidden;
+            animation: subtle-glow 3s ease-in-out infinite;
+        }
+
+        .name-tag::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg,
+                    transparent 30%,
+                    rgba(138, 180, 248, 0.3) 50%,
+                    transparent 70%);
+            animation: shimmer 4s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            }
+
+            100% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
+        }
+
+        @keyframes subtle-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 10px rgba(138, 180, 248, 0.2),
+                    0 0 20px rgba(186, 85, 211, 0.1);
+            }
+
+            50% {
+                box-shadow: 0 0 20px rgba(138, 180, 248, 0.4),
+                    0 0 30px rgba(186, 85, 211, 0.2),
+                    0 0 40px rgba(147, 112, 219, 0.1);
+            }
         }
 
         .name-tag:hover {
-            transform: translateY(-3px) scale(1.02);
+            transform: translateY(-3px) scale(1.05);
             background: rgba(100, 60, 80, 0.6);
-            box-shadow: 0 5px 15px rgba(212, 165, 165, 0.3);
+            box-shadow: 0 8px 25px rgba(138, 180, 248, 0.5),
+                0 0 40px rgba(186, 85, 211, 0.3);
+            animation: none;
+        }
+
+        .name-tag:hover::before {
+            animation: shimmer-fast 2s infinite;
+        }
+
+        @keyframes shimmer-fast {
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            }
+
+            100% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
+        }
+
+        /* Stagger animation delays for each name tag */
+        .name-tag:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .name-tag:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .name-tag:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .name-tag:nth-child(4) {
+            animation-delay: 0.6s;
+        }
+
+        .name-tag:nth-child(5) {
+            animation-delay: 0.8s;
+        }
+
+        .name-tag:nth-child(6) {
+            animation-delay: 1s;
+        }
+
+        .name-tag:nth-child(7) {
+            animation-delay: 1.2s;
+        }
+
+        .name-tag:nth-child(8) {
+            animation-delay: 1.4s;
+        }
+
+        .name-tag:nth-child(9) {
+            animation-delay: 1.6s;
+        }
+
+        .name-tag:nth-child(10) {
+            animation-delay: 1.8s;
+        }
+
+        .name-tag:nth-child(11) {
+            animation-delay: 2s;
+        }
+
+        .name-tag:nth-child(12) {
+            animation-delay: 2.2s;
         }
 
         .poem-section {
@@ -593,14 +719,37 @@
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             background: rgba(60, 40, 50, 0.4);
             aspect-ratio: 1;
             border: 2px solid rgba(212, 165, 165, 0.2);
         }
 
         .photo-frame:hover {
-            transform: scale(1.03) rotate(1deg);
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 0 12px 35px rgba(138, 180, 248, 0.4),
+                0 0 30px rgba(186, 85, 211, 0.3);
+            border-color: rgba(138, 180, 248, 0.5);
+        }
+
+        .photo-frame::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg,
+                    rgba(138, 180, 248, 0.1) 0%,
+                    transparent 50%,
+                    rgba(186, 85, 211, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .photo-frame:hover::after {
+            opacity: 1;
         }
 
         .photo-placeholder {
@@ -788,7 +937,7 @@
                     <div class="name-tag">💕 Orekelewa</div>
                     <div class="name-tag">🌟 Adunni</div>
                     <div class="name-tag">💎 Ashake</div>
-                    <div class="name-tag">🌺 Ahabi</div>
+                    <div class="name-tag">🌺 Ashabi</div>
                     <div class="name-tag">✨ Aduke</div>
                     <div class="name-tag">🌹 Amoke</div>
                     <div class="name-tag">💝 Apeke</div>
@@ -797,6 +946,10 @@
                     <div class="name-tag">💖 Ololufe</div>
                     <div class="name-tag">🌷 Ife Mi</div>
                     <div class="name-tag">✨ Omowunmi</div>
+                    <div class="name-tag">🌷 Afolake</div>
+                    <div class="name-tag">✨ Afoyeke</div>
+                    <div class="name-tag">🌷 Omo Folashade</div>
+                    <div class="name-tag">✨ Omo Faderera</div>
                 </div>
             </section>
 
@@ -866,31 +1019,32 @@
             <section class="pet-names">
                 <h2>📸 Awon Aworan Wa (Our Pictures)</h2>
                 <div class="gallery">
-                    <!-- PHOTO 1: Make sure you have photo1.jpg in your images folder -->
+                    <!-- PHOTO 1: ore1.jpeg -->
                     <div class="photo-frame">
                         <img src="images/ore1.jpeg" alt="Our beautiful moment" class="gallery-image">
                     </div>
 
-                    <!-- PHOTO 2: Make sure you have photo2.jpg in your images folder -->
+                    <!-- PHOTO 2: ore2.jpeg -->
                     <div class="photo-frame">
                         <img src="images/ore2.jpeg" alt="Sweet memories" class="gallery-image">
                     </div>
 
-                    <!-- PHOTO 3: Make sure you have photo3.jpg in your images folder -->
+                    <!-- PHOTO 3: ore3.jpeg -->
                     <div class="photo-frame">
                         <img src="images/ore3.jpeg" alt="Love and joy" class="gallery-image">
                     </div>
 
-                    <!-- PHOTO 4: Make sure you have photo4.jpg in your images folder -->
+                    <!-- PHOTO 4: ore4.jpeg -->
                     <div class="photo-frame">
                         <img src="images/ore4.jpeg" alt="Together forever" class="gallery-image">
                     </div>
                 </div>
                 <p class="gallery-note">
-                    💡 <strong>Your photos should be named:</strong> photo1.jpg, photo2.jpg, photo3.jpg, photo4.jpg in
-                    the 'images' folder.<br>
-                    You can use any image format (.jpg, .jpeg, .png) - just update the file extensions in the code above
-                    to match your files.
+                    💡 <strong>Hello</strong> Dear<br>
+                    I really don't want to do this thing called life without you in it.<br> I've seriously 
+                    been wondering how hooked and obsessed i am over you.<br>
+                    I dunno if that's a good thing or not<br>
+                    but one thing i'm sure off is that i dont want you far from me
                 </p>
             </section>
 
