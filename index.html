@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Happy Birthday, Orekelewa 💙</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,19 +12,6 @@
         rel="stylesheet" />
 
     <style>
-        /* ═══════════════════════════════════════════
-Happy Birthday Orekelewa — Stylesheet
-Theme: Midnight Blue · Gold · Glitter
-═══════════════════════════════════════════ */
-
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         :root {
             --royal: #0a1f5c;
             --midnight: #060d2e;
@@ -41,8 +28,17 @@ Theme: Midnight Blue · Gold · Glitter
             --glass-border: rgba(169, 200, 255, 0.18);
         }
 
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         html {
             scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
         }
 
         body {
@@ -51,117 +47,201 @@ Theme: Midnight Blue · Gold · Glitter
             color: var(--cream);
             overflow-x: hidden;
             min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* ── GLITTER CANVAS ── */
-        #glitterCanvas {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 9998;
-        }
-
-        /* ── PRELOADER ── */
+        /* ═══════════════════════════════════════════
+           BALLOON POP PRELOADER
+           ═══════════════════════════════════════════ */
         .preloader {
             position: fixed;
             inset: 0;
             background: radial-gradient(ellipse at 50% 40%, #0d1e6b 0%, #04091f 100%);
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: opacity 1s ease-out;
+            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.2s;
+            overflow: hidden;
         }
 
-        .preloader.fade-out {
+        .preloader.done {
             opacity: 0;
+            visibility: hidden;
             pointer-events: none;
         }
 
-        .cake-scene {
+        .balloon-scene {
             position: relative;
-            width: 280px;
-            height: 280px;
+            width: 100%;
+            max-width: 400px;
+            height: 60vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            padding: 20px;
         }
 
-        .cake-svg {
+        .balloon-container {
+            position: relative;
             width: 140px;
-            height: 130px;
+            height: 200px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .candle-flame {
-            animation: flicker 0.5s ease-in-out infinite alternate;
-            transform-origin: 50% 100%;
+        .balloon-container:active {
+            transform: scale(0.92);
         }
 
-        @keyframes flicker {
-            from {
-                transform: scaleX(1) scaleY(1) rotate(-3deg);
-                opacity: 1;
-            }
-
-            to {
-                transform: scaleX(0.85) scaleY(1.15) rotate(3deg);
-                opacity: 0.9;
-            }
-        }
-
-        .confetti-piece {
+        .balloon {
+            width: 120px;
+            height: 150px;
             position: absolute;
-            width: 8px;
-            height: 8px;
-            border-radius: 2px;
-            /* FIX: centre on the spawn point */
-            transform: translate(-50%, -50%);
-            opacity: 0;
-            animation: confetti-fall 2.5s ease-in forwards;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: balloonFloat 3s ease-in-out infinite;
         }
 
-        @keyframes confetti-fall {
-            0% {
-                transform: translate(-50%, -50%) translateX(0) translateY(0) rotate(0deg);
-                opacity: 1;
-            }
+        @keyframes balloonFloat {
 
+            0%,
             100% {
-                transform: translate(-50%, -50%) translateX(var(--dx)) translateY(var(--dy)) rotate(var(--dr));
-                opacity: 0;
+                transform: translateX(-50%) translateY(0) rotate(-2deg);
+            }
+
+            50% {
+                transform: translateX(-50%) translateY(-15px) rotate(2deg);
             }
         }
 
-        .loader-text {
+        .balloon-body {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 30% 30%, #5a8fff 0%, #1e52c0 50%, #0a1f5c 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: relative;
+            box-shadow:
+                inset -8px -8px 20px rgba(0, 0, 0, 0.3),
+                inset 8px 8px 20px rgba(255, 255, 255, 0.15),
+                0 8px 30px rgba(30, 82, 192, 0.4);
+        }
+
+        .balloon-body::after {
+            content: '';
+            position: absolute;
+            top: 18%;
+            left: 22%;
+            width: 28%;
+            height: 18%;
+            background: radial-gradient(ellipse, rgba(255, 255, 255, 0.5) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: rotate(-25deg);
+        }
+
+        .balloon-knot {
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 12px;
+            background: linear-gradient(135deg, #1e52c0, #0a1f5c);
+            border-radius: 0 0 50% 50%;
+        }
+
+        .balloon-string {
+            position: absolute;
+            bottom: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 80px;
+            background: linear-gradient(to bottom, rgba(240, 208, 128, 0.8), rgba(240, 208, 128, 0.2));
+            animation: stringWave 3s ease-in-out infinite;
+            transform-origin: top center;
+        }
+
+        @keyframes stringWave {
+
+            0%,
+            100% {
+                transform: translateX(-50%) rotate(-3deg);
+            }
+
+            50% {
+                transform: translateX(-50%) rotate(3deg);
+            }
+        }
+
+        .tap-hint {
+            margin-top: 100px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85em;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            opacity: 0;
+            animation: tapPulse 2s ease-in-out infinite 1s;
+            text-align: center;
+        }
+
+        @keyframes tapPulse {
+
+            0%,
+            100% {
+                opacity: 0.4;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+        }
+
+        .preloader-title {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             font-family: 'Great Vibes', cursive;
-            font-size: 2em;
+            font-size: clamp(2em, 7vw, 3.5em);
             color: var(--gold-light);
-            text-shadow: 0 0 20px rgba(201, 168, 76, 0.7);
+            text-shadow: 0 0 30px rgba(201, 168, 76, 0.6), 0 0 60px rgba(201, 168, 76, 0.3);
             opacity: 0;
             white-space: nowrap;
             text-align: center;
-            animation: text-appear 3s ease-in-out 1.5s forwards;
+            pointer-events: none;
+            z-index: 10;
         }
 
-        @keyframes text-appear {
+        .preloader-title.show {
+            animation: titleReveal 2.5s ease-out forwards;
+        }
+
+        @keyframes titleReveal {
             0% {
                 opacity: 0;
-                transform: translate(-50%, -50%) scale(0.6);
+                transform: translate(-50%, -50%) scale(0.3) rotate(-5deg);
             }
 
-            30% {
+            40% {
                 opacity: 1;
-                transform: translate(-50%, -50%) scale(1.05);
+                transform: translate(-50%, -50%) scale(1.1) rotate(1deg);
             }
 
-            70% {
+            60% {
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+            }
+
+            80% {
                 opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
             }
 
             100% {
@@ -170,7 +250,21 @@ Theme: Midnight Blue · Gold · Glitter
             }
         }
 
-        /* ── FLOATING PARTICLES ── */
+        .pop-particle {
+            position: absolute;
+            pointer-events: none;
+            border-radius: 50%;
+        }
+
+        /* GLITTER CANVAS */
+        #glitterCanvas {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9998;
+        }
+
+        /* FLOATING PARTICLES */
         .particles {
             position: fixed;
             inset: 0;
@@ -181,9 +275,10 @@ Theme: Midnight Blue · Gold · Glitter
 
         .particle {
             position: absolute;
-            font-size: 18px;
+            font-size: clamp(12px, 3vw, 18px);
             opacity: 0;
             animation: rise linear infinite;
+            will-change: transform, opacity;
         }
 
         @keyframes rise {
@@ -192,12 +287,12 @@ Theme: Midnight Blue · Gold · Glitter
                 transform: translateY(0) rotate(0deg);
             }
 
-            10% {
-                opacity: 0.6;
+            8% {
+                opacity: 0.7;
             }
 
-            90% {
-                opacity: 0.6;
+            92% {
+                opacity: 0.7;
             }
 
             100% {
@@ -206,21 +301,22 @@ Theme: Midnight Blue · Gold · Glitter
             }
         }
 
-        /* ── MAIN CONTENT ── */
+        /* MAIN CONTENT */
         .main-content {
             opacity: 0;
-            transition: opacity 1s ease-in;
+            transition: opacity 1.2s ease-in;
         }
 
         .main-content.show {
             opacity: 1;
         }
 
-        /* ── HERO ── */
+        /* HERO */
         .hero-bg {
             position: relative;
             width: 100%;
             min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -231,13 +327,19 @@ Theme: Midnight Blue · Gold · Glitter
         .hero-bg-img {
             position: absolute;
             inset: 0;
-            /* FIX: fallback gradient first so hero always has a background */
-            background:
-                url('images/ore.jpeg') center/cover no-repeat,
-                linear-gradient(160deg, #0c1b5a 0%, #060d2e 100%);
-            filter: brightness(0.38) saturate(0.9);
+            background: linear-gradient(160deg, #0c1b5a 0%, #060d2e 100%);
             z-index: 0;
-            transition: filter 1s ease;
+        }
+
+        .hero-bg-img.has-image {
+            background: url('images/ore.jpeg') center/cover no-repeat, linear-gradient(160deg, #0c1b5a 0%, #060d2e 100%);
+        }
+
+        .hero-bg-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(6, 13, 46, 0.62);
         }
 
         .hero-bg::before {
@@ -251,28 +353,6 @@ Theme: Midnight Blue · Gold · Glitter
             pointer-events: none;
         }
 
-        .hero-bg::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(circle at 20% 30%, rgba(240, 208, 128, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(168, 200, 255, 0.08) 0%, transparent 50%);
-            z-index: 2;
-            pointer-events: none;
-            animation: hero-shimmer 8s ease-in-out infinite alternate;
-        }
-
-        @keyframes hero-shimmer {
-            from {
-                opacity: 0.6;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
         .stars-canvas {
             position: absolute;
             inset: 0;
@@ -284,19 +364,20 @@ Theme: Midnight Blue · Gold · Glitter
             position: relative;
             z-index: 3;
             text-align: center;
-            padding: 80px 20px 60px;
+            padding: clamp(60px, 15vh, 100px) clamp(16px, 5vw, 40px) clamp(40px, 10vh, 80px);
             max-width: 700px;
+            width: 100%;
         }
 
         .crown-emoji {
-            font-size: 3em;
+            font-size: clamp(2em, 8vw, 3.5em);
             display: block;
             margin-bottom: 12px;
-            animation: float-gentle 4s ease-in-out infinite;
+            animation: floatGentle 4s ease-in-out infinite;
             filter: drop-shadow(0 0 18px rgba(201, 168, 76, 0.7));
         }
 
-        @keyframes float-gentle {
+        @keyframes floatGentle {
 
             0%,
             100% {
@@ -310,7 +391,7 @@ Theme: Midnight Blue · Gold · Glitter
 
         .main-title {
             font-family: 'Great Vibes', cursive;
-            font-size: clamp(3em, 8vw, 5.5em);
+            font-size: clamp(2.8em, 12vw, 5.5em);
             font-weight: 400;
             line-height: 1.1;
             background: linear-gradient(135deg, var(--ice) 0%, var(--gold-light) 45%, var(--ice) 100%);
@@ -318,13 +399,13 @@ Theme: Midnight Blue · Gold · Glitter
             -webkit-text-fill-color: transparent;
             background-clip: text;
             background-size: 200% 200%;
-            animation: shimmer-text 5s ease-in-out infinite;
+            animation: shimmerText 5s ease-in-out infinite;
             letter-spacing: 2px;
             margin-bottom: 12px;
             filter: drop-shadow(0 0 24px rgba(201, 168, 76, 0.35));
         }
 
-        @keyframes shimmer-text {
+        @keyframes shimmerText {
 
             0%,
             100% {
@@ -339,14 +420,14 @@ Theme: Midnight Blue · Gold · Glitter
         .birthday-badge {
             display: inline-block;
             font-family: 'Cinzel Decorative', serif;
-            font-size: clamp(0.75em, 2vw, 1em);
-            letter-spacing: 6px;
+            font-size: clamp(0.65em, 2vw, 0.9em);
+            letter-spacing: clamp(3px, 1vw, 6px);
             text-transform: uppercase;
             color: var(--gold);
             border: 1px solid rgba(201, 168, 76, 0.4);
-            padding: 8px 28px;
+            padding: clamp(6px, 2vw, 10px) clamp(16px, 4vw, 28px);
             border-radius: 30px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             background: rgba(201, 168, 76, 0.08);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -354,17 +435,18 @@ Theme: Midnight Blue · Gold · Glitter
 
         .hero-tagline {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1em, 2.5vw, 1.35em);
+            font-size: clamp(0.95em, 3vw, 1.35em);
             font-style: italic;
             color: var(--ice);
             opacity: 0.9;
             margin-top: 10px;
             letter-spacing: 1px;
+            padding: 0 10px;
         }
 
         .scroll-cue {
             position: absolute;
-            bottom: 30px;
+            bottom: clamp(20px, 5vh, 40px);
             left: 50%;
             transform: translateX(-50%);
             z-index: 3;
@@ -373,11 +455,11 @@ Theme: Midnight Blue · Gold · Glitter
             align-items: center;
             gap: 6px;
             opacity: 0.55;
-            animation: bounce-down 2.5s ease-in-out infinite;
+            animation: bounceDown 2.5s ease-in-out infinite;
         }
 
         .scroll-cue span {
-            font-size: 0.7em;
+            font-size: 0.65em;
             font-family: 'Montserrat', sans-serif;
             letter-spacing: 3px;
             text-transform: uppercase;
@@ -385,14 +467,14 @@ Theme: Midnight Blue · Gold · Glitter
         }
 
         .scroll-cue .arrow {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             border-right: 1.5px solid var(--ice);
             border-bottom: 1.5px solid var(--ice);
             transform: rotate(45deg);
         }
 
-        @keyframes bounce-down {
+        @keyframes bounceDown {
 
             0%,
             100% {
@@ -404,7 +486,7 @@ Theme: Midnight Blue · Gold · Glitter
             }
         }
 
-        /* ── PAGE BODY ── */
+        /* PAGE BODY */
         .page-body {
             position: relative;
             background: linear-gradient(180deg, var(--midnight) 0%, #080e2a 40%, #0a1230 100%);
@@ -412,22 +494,22 @@ Theme: Midnight Blue · Gold · Glitter
 
         .divider {
             text-align: center;
-            padding: 10px 0;
-            font-size: 1.4em;
+            padding: clamp(8px, 3vw, 16px) 0;
+            font-size: clamp(1.1em, 3vw, 1.5em);
             opacity: 0.4;
-            letter-spacing: 12px;
+            letter-spacing: clamp(6px, 2vw, 12px);
         }
 
         .section {
             max-width: 940px;
             margin: 0 auto;
-            padding: 60px 24px;
+            padding: clamp(40px, 8vw, 70px) clamp(14px, 4vw, 28px);
         }
 
         .section-label {
             font-family: 'Cinzel Decorative', serif;
-            font-size: 0.65em;
-            letter-spacing: 5px;
+            font-size: clamp(0.55em, 1.5vw, 0.7em);
+            letter-spacing: clamp(3px, 1vw, 5px);
             color: var(--gold);
             text-align: center;
             display: block;
@@ -437,37 +519,39 @@ Theme: Midnight Blue · Gold · Glitter
 
         .section-title {
             font-family: 'Great Vibes', cursive;
-            font-size: clamp(2em, 5vw, 3.2em);
+            font-size: clamp(1.8em, 8vw, 3.2em);
             text-align: center;
             background: linear-gradient(90deg, var(--ice), var(--gold-light), var(--ice));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 36px;
+            margin-bottom: clamp(24px, 5vw, 36px);
             filter: drop-shadow(0 0 16px rgba(201, 168, 76, 0.25));
         }
 
-        /* ── PET NAMES ── */
+        /* PET NAMES */
         .names-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
-            gap: 14px;
+            grid-template-columns: repeat(auto-fit, minmax(min(130px, 45%), 1fr));
+            gap: clamp(10px, 2vw, 14px);
         }
 
         .name-tag {
             background: var(--glass);
             border: 1px solid var(--glass-border);
             border-radius: 14px;
-            padding: 14px 10px;
+            padding: clamp(10px, 3vw, 14px) clamp(6px, 2vw, 10px);
             text-align: center;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.05em;
+            font-size: clamp(0.9em, 3vw, 1.05em);
             color: var(--ice);
             transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
+            user-select: none;
+            -webkit-user-select: none;
         }
 
         .name-tag::before {
@@ -502,16 +586,15 @@ Theme: Midnight Blue · Gold · Glitter
             transition: opacity 0.3s ease;
         }
 
-        .name-tag:hover {
+        .name-tag:hover,
+        .name-tag:active {
             transform: translateY(-4px) scale(1.04);
             background: rgba(30, 82, 192, 0.3);
-            box-shadow:
-                0 8px 28px rgba(77, 135, 232, 0.35),
-                0 0 0 1px rgba(169, 200, 255, 0.3),
-                0 0 20px rgba(240, 208, 128, 0.15);
+            box-shadow: 0 8px 28px rgba(77, 135, 232, 0.35), 0 0 0 1px rgba(169, 200, 255, 0.3), 0 0 20px rgba(240, 208, 128, 0.15);
         }
 
-        .name-tag:hover::after {
+        .name-tag:hover::after,
+        .name-tag:active::after {
             opacity: 1;
         }
 
@@ -523,17 +606,17 @@ Theme: Midnight Blue · Gold · Glitter
             animation-delay: -1s;
         }
 
-        /* ── GALLERY ── */
+        /* GALLERY - MOBILE OPTIMIZED */
         .album-section {
-            padding-bottom: 80px;
+            padding-bottom: clamp(40px, 8vw, 80px);
         }
 
         .album-header {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 18px;
-            margin-bottom: 40px;
+            gap: clamp(10px, 3vw, 18px);
+            margin-bottom: clamp(24px, 5vw, 40px);
         }
 
         .album-header-line {
@@ -547,28 +630,32 @@ Theme: Midnight Blue · Gold · Glitter
         .album-tabs {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 32px;
+            gap: clamp(6px, 2vw, 10px);
+            margin-bottom: clamp(20px, 4vw, 32px);
             flex-wrap: wrap;
+            padding: 0 10px;
         }
 
         .album-tab {
             font-family: 'Cinzel Decorative', serif;
-            font-size: 0.62em;
-            letter-spacing: 3px;
+            font-size: clamp(0.55em, 1.8vw, 0.62em);
+            letter-spacing: clamp(2px, 0.8vw, 3px);
             text-transform: uppercase;
             color: var(--ice);
             background: var(--glass);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
-            padding: 7px 18px;
+            padding: clamp(5px, 2vw, 7px) clamp(10px, 3vw, 18px);
             cursor: pointer;
             transition: all 0.3s ease;
             backdrop-filter: blur(8px);
+            -webkit-tap-highlight-color: transparent;
+            white-space: nowrap;
         }
 
         .album-tab.active,
-        .album-tab:hover {
+        .album-tab:hover,
+        .album-tab:active {
             background: rgba(30, 82, 192, 0.45);
             border-color: var(--gold);
             color: var(--gold-light);
@@ -585,26 +672,28 @@ Theme: Midnight Blue · Gold · Glitter
 
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 18px;
+            grid-template-columns: repeat(auto-fill, minmax(min(160px, 45%), 1fr));
+            gap: clamp(10px, 2.5vw, 18px);
+            padding: 0 clamp(4px, 1.5vw, 12px);
         }
 
         .photo-frame {
             position: relative;
-            border-radius: 16px;
+            border-radius: clamp(10px, 3vw, 16px);
             overflow: hidden;
             aspect-ratio: 1;
             border: 1px solid rgba(169, 200, 255, 0.2);
             background: linear-gradient(135deg, #0d1e5a, #0a1230);
             transition: transform 0.4s cubic-bezier(.2, .8, .3, 1.2), box-shadow 0.4s ease;
             cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .photo-frame::before {
             content: '';
             position: absolute;
             inset: -3px;
-            border-radius: 18px;
+            border-radius: clamp(12px, 3.5vw, 18px);
             border: 2px solid transparent;
             background: linear-gradient(135deg, var(--gold), var(--cobalt), var(--gold)) border-box;
             -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
@@ -613,33 +702,35 @@ Theme: Midnight Blue · Gold · Glitter
             opacity: 0;
             transition: opacity 0.4s ease;
             z-index: 2;
+            pointer-events: none;
         }
 
         .photo-frame::after {
             content: '💙';
             position: absolute;
-            bottom: 10px;
-            right: 10px;
-            font-size: 1.1em;
+            bottom: clamp(6px, 2vw, 10px);
+            right: clamp(6px, 2vw, 10px);
+            font-size: clamp(0.8em, 3vw, 1.1em);
             z-index: 3;
             opacity: 0;
             transform: scale(0.5) translateY(6px);
             transition: all 0.35s ease;
+            pointer-events: none;
         }
 
-        .photo-frame:hover {
+        .photo-frame:hover,
+        .photo-frame:active {
             transform: scale(1.05) rotate(0.8deg);
-            box-shadow:
-                0 14px 44px rgba(30, 82, 192, 0.55),
-                0 0 0 1.5px rgba(201, 168, 76, 0.5),
-                0 0 40px rgba(201, 168, 76, 0.12);
+            box-shadow: 0 14px 44px rgba(30, 82, 192, 0.55), 0 0 0 1.5px rgba(201, 168, 76, 0.5), 0 0 40px rgba(201, 168, 76, 0.12);
         }
 
-        .photo-frame:hover::before {
+        .photo-frame:hover::before,
+        .photo-frame:active::before {
             opacity: 1;
         }
 
-        .photo-frame:hover::after {
+        .photo-frame:hover::after,
+        .photo-frame:active::after {
             opacity: 1;
             transform: scale(1) translateY(0);
         }
@@ -650,9 +741,11 @@ Theme: Midnight Blue · Gold · Glitter
             object-fit: cover;
             display: block;
             transition: transform 0.5s ease, filter 0.4s ease;
+            will-change: transform;
         }
 
-        .photo-frame:hover .gallery-image {
+        .photo-frame:hover .gallery-image,
+        .photo-frame:active .gallery-image {
             transform: scale(1.06);
             filter: brightness(1.05) saturate(1.15);
         }
@@ -663,18 +756,18 @@ Theme: Midnight Blue · Gold · Glitter
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5em;
+            font-size: clamp(1.8em, 6vw, 2.5em);
             opacity: 0.35;
         }
 
         .photo-slot-hint {
             position: absolute;
-            bottom: 8px;
+            bottom: 6px;
             left: 0;
             right: 0;
             text-align: center;
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.6em;
+            font-size: clamp(0.5em, 1.5vw, 0.65em);
             letter-spacing: 2px;
             color: var(--ice);
             opacity: 0.45;
@@ -683,13 +776,13 @@ Theme: Midnight Blue · Gold · Glitter
         }
 
         .gallery-note {
-            margin-top: 28px;
+            margin-top: clamp(18px, 4vw, 28px);
             text-align: center;
             font-style: italic;
-            font-size: 1.08em;
+            font-size: clamp(0.95em, 3vw, 1.08em);
             color: var(--ice);
             line-height: 1.9;
-            padding: 22px 28px;
+            padding: clamp(16px, 4vw, 22px) clamp(16px, 4vw, 28px);
             border: 1px solid var(--glass-border);
             border-radius: 16px;
             background: var(--glass);
@@ -709,18 +802,19 @@ Theme: Midnight Blue · Gold · Glitter
             grid-row: span 2;
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 480px) {
             .photo-frame.featured {
-                grid-column: span 1;
+                grid-column: span 2;
                 grid-row: span 1;
+                aspect-ratio: 2 / 1;
             }
         }
 
         .photo-frame.featured::after {
             content: '💙';
-            font-size: 2em;
-            bottom: 14px;
-            right: 14px;
+            font-size: clamp(1.2em, 5vw, 2em);
+            bottom: clamp(8px, 3vw, 14px);
+            right: clamp(8px, 3vw, 14px);
             animation: heartbeat 2.8s ease-in-out infinite;
             opacity: 0.7;
             transform: none;
@@ -756,19 +850,19 @@ Theme: Midnight Blue · Gold · Glitter
             }
         }
 
-        /* ── POEMS ── */
+        /* POEMS */
         .poem-grid {
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: clamp(16px, 4vw, 24px);
         }
 
         .poem-card {
             background: var(--glass);
             border: 1px solid var(--glass-border);
             border-left: 3px solid var(--cobalt);
-            border-radius: 0 16px 16px 0;
-            padding: 26px 28px;
+            border-radius: 0 clamp(12px, 3vw, 16px) clamp(12px, 3vw, 16px) 0;
+            padding: clamp(18px, 4vw, 26px) clamp(16px, 4vw, 28px);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             transition: border-left-color 0.3s ease, box-shadow 0.3s ease;
@@ -788,25 +882,27 @@ Theme: Midnight Blue · Gold · Glitter
             transition: opacity 0.4s ease;
         }
 
-        .poem-card:hover {
+        .poem-card:hover,
+        .poem-card:active {
             border-left-color: var(--gold);
             box-shadow: 0 6px 30px rgba(201, 168, 76, 0.12), inset 0 0 40px rgba(30, 82, 192, 0.06);
         }
 
-        .poem-card:hover::before {
+        .poem-card:hover::before,
+        .poem-card:active::before {
             opacity: 1;
         }
 
         .poem-card-title {
             font-family: 'Cinzel Decorative', serif;
-            font-size: 0.9em;
+            font-size: clamp(0.75em, 2.5vw, 0.9em);
             color: var(--gold);
             letter-spacing: 3px;
             margin-bottom: 14px;
         }
 
         .poem-card p {
-            font-size: 1.12em;
+            font-size: clamp(1em, 3.5vw, 1.12em);
             line-height: 1.9;
             color: var(--cream);
         }
@@ -817,29 +913,29 @@ Theme: Midnight Blue · Gold · Glitter
             border-top: 1px solid var(--glass-border);
             font-style: italic;
             color: var(--ice);
-            font-size: 1em;
+            font-size: clamp(0.9em, 3vw, 1em);
             opacity: 0.8;
         }
 
-        /* ── LOVE BLOCK ── */
+        /* LOVE BLOCK */
         .love-block {
             text-align: center;
-            padding: 60px 24px 40px;
+            padding: clamp(40px, 10vw, 60px) clamp(16px, 5vw, 24px) clamp(30px, 6vw, 40px);
         }
 
         .love-big {
             font-family: 'Great Vibes', cursive;
-            font-size: clamp(2.2em, 6vw, 4em);
+            font-size: clamp(1.8em, 10vw, 4em);
             background: linear-gradient(135deg, var(--ice) 0%, var(--gold-light) 50%, var(--sky-blue) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             line-height: 1.3;
-            animation: pulse-love 3s ease-in-out infinite;
+            animation: pulseLove 3s ease-in-out infinite;
             filter: drop-shadow(0 0 28px rgba(201, 168, 76, 0.3));
         }
 
-        @keyframes pulse-love {
+        @keyframes pulseLove {
 
             0%,
             100% {
@@ -855,25 +951,25 @@ Theme: Midnight Blue · Gold · Glitter
             display: block;
             font-family: 'Montserrat', sans-serif;
             font-weight: 300;
-            font-size: 0.85em;
-            letter-spacing: 4px;
+            font-size: clamp(0.7em, 2.5vw, 0.85em);
+            letter-spacing: clamp(2px, 1vw, 4px);
             color: var(--ice);
             opacity: 0.6;
             margin-top: 10px;
         }
 
-        /* ── FOOTER ── */
+        /* FOOTER */
         footer {
             text-align: center;
-            padding: 30px 20px 50px;
+            padding: clamp(20px, 5vw, 30px) clamp(14px, 4vw, 20px) clamp(30px, 8vw, 50px);
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1em;
+            font-size: clamp(0.95em, 3vw, 1.1em);
             color: var(--sky-blue);
             opacity: 0.7;
             font-style: italic;
         }
 
-        /* ── SCROLL REVEAL ── */
+        /* SCROLL REVEAL */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -885,22 +981,94 @@ Theme: Midnight Blue · Gold · Glitter
             transform: translateY(0);
         }
 
-        /* ── RESPONSIVE ── */
-        @media (max-width: 600px) {
+        /* LIGHTBOX */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(4, 9, 31, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            padding: 20px;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox img {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox.active img {
+            transform: scale(1);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--cream);
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 480px) {
             .names-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
 
             .gallery {
                 grid-template-columns: repeat(2, 1fr);
-            }
-
-            .section {
-                padding: 44px 16px;
+                gap: 8px;
             }
 
             .album-tabs {
-                gap: 8px;
+                gap: 6px;
+            }
+
+            .album-tab {
+                padding: 5px 10px;
+                font-size: 0.55em;
+                letter-spacing: 2px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
         }
     </style>
@@ -908,71 +1076,49 @@ Theme: Midnight Blue · Gold · Glitter
 </head>
 
 <body>
-
-    <!-- GLITTER CANVAS -->
     <canvas id="glitterCanvas"></canvas>
 
-    <!-- PRELOADER -->
     <div class="preloader" id="preloader">
-        <div class="cake-scene">
-            <svg class="cake-svg" viewBox="0 0 140 130" xmlns="http://www.w3.org/2000/svg">
-                <rect x="34" y="22" width="6" height="22" rx="3" fill="#f0d080" />
-                <rect x="67" y="14" width="6" height="26" rx="3" fill="#a8c8ff" />
-                <rect x="100" y="20" width="6" height="22" rx="3" fill="#f0d080" />
-                <ellipse class="candle-flame" cx="37" cy="20" rx="5" ry="7" fill="#ffa040" opacity="0.95" />
-                <ellipse class="candle-flame" cx="70" cy="12" rx="5" ry="7" fill="#ffd060" opacity="0.95"
-                    style="animation-delay:.15s" />
-                <ellipse class="candle-flame" cx="103" cy="18" rx="5" ry="7" fill="#ffa040" opacity="0.95"
-                    style="animation-delay:.3s" />
-                <rect x="28" y="44" width="84" height="30" rx="6" fill="#1a3a8f" />
-                <rect x="28" y="68" width="84" height="6" rx="2" fill="#c9a84c" opacity="0.6" />
-                <rect x="16" y="74" width="108" height="32" rx="6" fill="#1e52c0" />
-                <rect x="16" y="100" width="108" height="6" rx="2" fill="#c9a84c" opacity="0.6" />
-                <rect x="6" y="106" width="128" height="20" rx="6" fill="#0a1f5c" />
-                <circle cx="60" cy="58" r="4" fill="#f0d080" opacity="0.7" />
-                <circle cx="80" cy="55" r="3" fill="#a8c8ff" opacity="0.7" />
-                <circle cx="48" cy="55" r="3" fill="#ffe4f0" opacity="0.6" />
-                <circle cx="44" cy="87" r="4" fill="#f0d080" opacity="0.6" />
-                <circle cx="70" cy="84" r="5" fill="#a8c8ff" opacity="0.7" />
-                <circle cx="96" cy="87" r="4" fill="#ffe4f0" opacity="0.6" />
-                <ellipse cx="70" cy="126" rx="70" ry="6" fill="#060d2e" opacity="0.5" />
-            </svg>
-            <div class="loader-text" id="loaderText">
-                Happy Birthday<br>
-                <small style="font-size:.65em;letter-spacing:2px;opacity:.8">Orekelewa Mi 💙</small>
+        <div class="balloon-scene" id="balloonScene">
+            <div class="balloon-container" id="balloon" role="button" aria-label="Tap to pop the balloon">
+                <div class="balloon">
+                    <div class="balloon-body"></div>
+                    <div class="balloon-knot"></div>
+                </div>
+                <div class="balloon-string"></div>
             </div>
-            <div id="confettiContainer" style="position:absolute;inset:0;pointer-events:none;"></div>
+            <div class="tap-hint" id="tapHint">Tap the balloon</div>
+        </div>
+        <div class="preloader-title" id="preloaderTitle">
+            Happy Birthday<br>
+            <small style="font-size:.55em;letter-spacing:3px;opacity:.85">Orekelewa Mi 💙</small>
         </div>
     </div>
 
-    <!-- FLOATING PARTICLES -->
     <div class="particles" id="particles"></div>
 
-    <!-- MAIN CONTENT -->
-    <div class="main-content" id="mainContent">
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+        <div class="lightbox-close" id="lightboxClose">&times;</div>
+        <img src="" alt="Full size" id="lightboxImg">
+    </div>
 
-        <!-- HERO -->
+    <div class="main-content" id="mainContent">
         <section class="hero-bg">
             <div class="hero-bg-img" id="heroBg"></div>
             <canvas class="stars-canvas" id="starsCanvas"></canvas>
-
             <div class="hero-content">
                 <span class="crown-emoji">👑</span>
                 <div class="birthday-badge">Happy Birthday</div>
                 <h1 class="main-title">Orekelewa Mi</h1>
                 <p class="hero-tagline">My beautiful one — today, the stars shine for you alone</p>
             </div>
-
             <div class="scroll-cue" aria-hidden="true">
                 <span>scroll</span>
                 <div class="arrow"></div>
             </div>
         </section>
 
-        <!-- PAGE BODY -->
         <div class="page-body">
-
-            <!-- PET NAMES -->
             <section class="section reveal">
                 <span class="section-label">✦ Oruko Ife Mi ✦</span>
                 <h2 class="section-title">My Names for You</h2>
@@ -998,10 +1144,8 @@ Theme: Midnight Blue · Gold · Glitter
 
             <div class="divider" aria-hidden="true">· · ✦ · ·</div>
 
-            <!-- PHOTO ALBUM -->
             <section class="section album-section reveal">
                 <span class="section-label">✦ Awon Aworan Wa ✦</span>
-
                 <div class="album-header">
                     <div class="album-header-line"></div>
                     <h2 class="section-title" style="margin-bottom:0">Our Moments</h2>
@@ -1017,59 +1161,58 @@ Theme: Midnight Blue · Gold · Glitter
                         Days</button>
                 </div>
 
-                <!-- All Memories -->
                 <div class="album-page active" id="album-all">
                     <div class="gallery">
-                        <div class="photo-frame featured">
-                            <img src="images/ore1.jpeg" alt="Our beautiful moment" class="gallery-image"
+                        <div class="photo-frame featured" data-full="images/ore1.jpeg">
+                            <img src="images/ore1.jpeg" alt="Our beautiful moment" class="gallery-image" loading="lazy"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <div class="placeholder" style="display:none">📸</div>
                             <span class="photo-slot-hint">ore1.jpeg</span>
                         </div>
-                        <div class="photo-frame">
-                            <img src="images/ore2.jpeg" alt="Sweet memory" class="gallery-image"
+                        <div class="photo-frame" data-full="images/ore2.jpeg">
+                            <img src="images/ore2.jpeg" alt="Sweet memory" class="gallery-image" loading="lazy"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <div class="placeholder" style="display:none">📸</div>
                             <span class="photo-slot-hint">ore2.jpeg</span>
                         </div>
-                        <div class="photo-frame">
-                            <img src="images/ore3.jpeg" alt="Love and joy" class="gallery-image"
+                        <div class="photo-frame" data-full="images/ore3.jpeg">
+                            <img src="images/ore3.jpeg" alt="Love and joy" class="gallery-image" loading="lazy"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <div class="placeholder" style="display:none">📸</div>
                             <span class="photo-slot-hint">ore3.jpeg</span>
                         </div>
-                        <div class="photo-frame">
-                            <img src="images/ore4.jpeg" alt="Together forever" class="gallery-image"
+                        <div class="photo-frame" data-full="images/ore4.jpeg">
+                            <img src="images/ore4.jpeg" alt="Together forever" class="gallery-image" loading="lazy"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <div class="placeholder" style="display:none">📸</div>
                             <span class="photo-slot-hint">ore4.jpeg</span>
                         </div>
-                        <div class="photo-frame">
-                            <img src="images/ore5.jpeg" alt="Beautiful smile" class="gallery-image"
+                        <div class="photo-frame" data-full="images/ore5.jpeg">
+                            <img src="images/ore5.jpeg" alt="Beautiful smile" class="gallery-image" loading="lazy"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <div class="placeholder" style="display:none">📸</div>
                             <span class="photo-slot-hint">ore5.jpeg</span>
                         </div>
-                        <div class="photo-frame">
-                            <img src="images/ore6.jpeg" alt="Precious moment" class="gallery-image"
+                        <div class="photo-frame" data-full="images/ore6.jpeg">
+                            <img src="images/ore6.jpeg" alt="Precious moment" class="gallery-image" loading="lazy"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <div class="placeholder" style="display:none">📸</div>
                             <span class="photo-slot-hint">ore6.jpeg</span>
                         </div>
-                        <div class="photo-frame">
-                            <img src="images/ore7.jpeg" alt="My heart" class="gallery-image"
+                        <div class="photo-frame" data-full="images/ore7.jpeg">
+                            <img src="images/ore7.jpeg" alt="My heart" class="gallery-image" loading="lazy"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <div class="placeholder" style="display:none">📸</div>
                             <span class="photo-slot-hint">ore7.jpeg</span>
                         </div>
-                        <div class="photo-frame">
-                            <img src="images/ore8.jpeg" alt="Pure joy" class="gallery-image"
+                        <div class="photo-frame" data-full="images/ore8.jpeg">
+                            <img src="images/ore8.jpeg" alt="Pure joy" class="gallery-image" loading="lazy"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <div class="placeholder" style="display:none">📸</div>
                             <span class="photo-slot-hint">ore8.jpeg</span>
                         </div>
-                        <div class="photo-frame">
-                            <img src="images/ore9.jpeg" alt="Forever mine" class="gallery-image"
+                        <div class="photo-frame" data-full="images/ore9.jpeg">
+                            <img src="images/ore9.jpeg" alt="Forever mine" class="gallery-image" loading="lazy"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <div class="placeholder" style="display:none">📸</div>
                             <span class="photo-slot-hint">ore9.jpeg</span>
@@ -1077,35 +1220,34 @@ Theme: Midnight Blue · Gold · Glitter
                     </div>
                 </div>
 
-                <!-- Us Together -->
                 <div class="album-page" id="album-us">
                     <div class="gallery">
-                        <div class="photo-frame featured">
-                            <img src="images/ore10.jpeg" alt="Us together" class="gallery-image"
+                        <div class="photo-frame featured" data-full="images/ore10.jpeg">
+                            <img src="images/ore10.jpeg" alt="Us together" class="gallery-image" loading="lazy"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <div class="placeholder" style="display:none">📸</div>
                             <span class="photo-slot-hint">ore10.jpeg</span>
                         </div>
-                        <div class="photo-frame">
-                            <img src="images/ore11.jpeg" alt="Our adventure" class="gallery-image"
+                        <div class="photo-frame" data-full="images/ore11.jpeg">
+                            <img src="images/ore11.jpeg" alt="Our adventure" class="gallery-image" loading="lazy"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <div class="placeholder" style="display:none">📸</div>
                             <span class="photo-slot-hint">ore11.jpeg</span>
                         </div>
-                        <div class="photo-frame">
-                            <img src="images/ore12.jpeg" alt="Side by side" class="gallery-image"
+                        <div class="photo-frame" data-full="images/ore12.jpeg">
+                            <img src="images/ore12.jpeg" alt="Side by side" class="gallery-image" loading="lazy"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <div class="placeholder" style="display:none">📸</div>
                             <span class="photo-slot-hint">ore12.jpeg</span>
                         </div>
-                        <div class="photo-frame">
-                            <img src="images/ore13.jpeg" alt="Our world" class="gallery-image"
+                        <div class="photo-frame" data-full="images/ore13.jpeg">
+                            <img src="images/ore13.jpeg" alt="Our world" class="gallery-image" loading="lazy"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <div class="placeholder" style="display:none">📸</div>
                             <span class="photo-slot-hint">ore13.jpeg</span>
                         </div>
-                        <div class="photo-frame">
-                            <img src="images/ore14.jpeg" alt="Always us" class="gallery-image"
+                        <div class="photo-frame" data-full="images/ore14.jpeg">
+                            <img src="images/ore14.jpeg" alt="Always us" class="gallery-image" loading="lazy"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <div class="placeholder" style="display:none">📸</div>
                             <span class="photo-slot-hint">ore14.jpeg</span>
@@ -1113,29 +1255,28 @@ Theme: Midnight Blue · Gold · Glitter
                     </div>
                 </div>
 
-                <!-- Just You -->
                 <div class="album-page" id="album-her">
                     <div class="gallery">
-                        <div class="photo-frame featured">
-                            <img src="images/ore15.jpeg" alt="Beautiful you" class="gallery-image"
+                        <div class="photo-frame featured" data-full="images/ore15.jpeg">
+                            <img src="images/ore15.jpeg" alt="Beautiful you" class="gallery-image" loading="lazy"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <div class="placeholder" style="display:none">📸</div>
                             <span class="photo-slot-hint">ore15.jpeg</span>
                         </div>
-                        <div class="photo-frame">
-                            <img src="images/ore16.jpeg" alt="Radiant glow" class="gallery-image"
+                        <div class="photo-frame" data-full="images/ore16.jpeg">
+                            <img src="images/ore16.jpeg" alt="Radiant glow" class="gallery-image" loading="lazy"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <div class="placeholder" style="display:none">📸</div>
                             <span class="photo-slot-hint">ore16.jpeg</span>
                         </div>
-                        <div class="photo-frame">
-                            <img src="images/ore17.jpeg" alt="Simply you" class="gallery-image"
+                        <div class="photo-frame" data-full="images/ore17.jpeg">
+                            <img src="images/ore17.jpeg" alt="Simply you" class="gallery-image" loading="lazy"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <div class="placeholder" style="display:none">📸</div>
                             <span class="photo-slot-hint">ore17.jpeg</span>
                         </div>
-                        <div class="photo-frame">
-                            <img src="images/ore18.jpeg" alt="My favourite view" class="gallery-image"
+                        <div class="photo-frame" data-full="images/ore18.jpeg">
+                            <img src="images/ore18.jpeg" alt="My favourite view" class="gallery-image" loading="lazy"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <div class="placeholder" style="display:none">📸</div>
                             <span class="photo-slot-hint">ore18.jpeg</span>
@@ -1143,35 +1284,34 @@ Theme: Midnight Blue · Gold · Glitter
                     </div>
                 </div>
 
-                <!-- Special Days -->
                 <div class="album-page" id="album-special">
                     <div class="gallery">
-                        <div class="photo-frame featured">
-                            <img src="images/ore1.jpeg" alt="Special day" class="gallery-image"
+                        <div class="photo-frame featured" data-full="images/ore1.jpeg">
+                            <img src="images/ore1.jpeg" alt="Special day" class="gallery-image" loading="lazy"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <div class="placeholder" style="display:none">📸</div>
                             <span class="photo-slot-hint">ore1.jpeg</span>
                         </div>
-                        <div class="photo-frame">
-                            <img src="images/ore5.jpeg" alt="Celebration" class="gallery-image"
+                        <div class="photo-frame" data-full="images/ore5.jpeg">
+                            <img src="images/ore5.jpeg" alt="Celebration" class="gallery-image" loading="lazy"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <div class="placeholder" style="display:none">📸</div>
                             <span class="photo-slot-hint">ore5.jpeg</span>
                         </div>
-                        <div class="photo-frame">
-                            <img src="images/ore9.jpeg" alt="Joy" class="gallery-image"
+                        <div class="photo-frame" data-full="images/ore9.jpeg">
+                            <img src="images/ore9.jpeg" alt="Joy" class="gallery-image" loading="lazy"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <div class="placeholder" style="display:none">📸</div>
                             <span class="photo-slot-hint">ore9.jpeg</span>
                         </div>
-                        <div class="photo-frame">
-                            <img src="images/ore13.jpeg" alt="Together" class="gallery-image"
+                        <div class="photo-frame" data-full="images/ore13.jpeg">
+                            <img src="images/ore13.jpeg" alt="Together" class="gallery-image" loading="lazy"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <div class="placeholder" style="display:none">📸</div>
                             <span class="photo-slot-hint">ore13.jpeg</span>
                         </div>
-                        <div class="photo-frame">
-                            <img src="images/ore17.jpeg" alt="Memory" class="gallery-image"
+                        <div class="photo-frame" data-full="images/ore17.jpeg">
+                            <img src="images/ore17.jpeg" alt="Memory" class="gallery-image" loading="lazy"
                                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                             <div class="placeholder" style="display:none">📸</div>
                             <span class="photo-slot-hint">ore17.jpeg</span>
@@ -1189,12 +1329,10 @@ Theme: Midnight Blue · Gold · Glitter
 
             <div class="divider" aria-hidden="true">· · ✦ · ·</div>
 
-            <!-- POEMS -->
             <section class="section reveal">
                 <span class="section-label">✦ Ewi Ife ✦</span>
                 <h2 class="section-title">Love Poems</h2>
                 <div class="poem-grid">
-
                     <div class="poem-card">
                         <div class="poem-card-title">Orekelewa Mi</div>
                         <p>
@@ -1214,7 +1352,6 @@ Theme: Midnight Blue · Gold · Glitter
                             My love for you will never end
                         </p>
                     </div>
-
                     <div class="poem-card">
                         <div class="poem-card-title">Ayanfe Mi</div>
                         <p>
@@ -1234,7 +1371,6 @@ Theme: Midnight Blue · Gold · Glitter
                             So does my love flow for you
                         </p>
                     </div>
-
                     <div class="poem-card">
                         <div class="poem-card-title">Omoge Adun</div>
                         <p>
@@ -1255,11 +1391,9 @@ Theme: Midnight Blue · Gold · Glitter
                             So does my face brighten because of you
                         </p>
                     </div>
-
                 </div>
             </section>
 
-            <!-- LOVE MESSAGE -->
             <div class="love-block reveal">
                 <div class="love-big">
                     💙 Mo nife re, Orekelewa mi 💙
@@ -1274,158 +1408,140 @@ Theme: Midnight Blue · Gold · Glitter
     </div>
 
     <script>
-        /* ── PRELOADER ── */
-        (function () {
-            const colors = ['#f0d080', '#a8c8ff', '#ffe4f0', '#c9a84c', '#4d87e8', '#ffffff'];
-            const container = document.getElementById('confettiContainer');
 
-            function spawnConfetti() {
-                for (let i = 0; i < 40; i++) {
+        /* ═══════════════════════════════════════════
+           BALLOON POP PRELOADER
+           ═══════════════════════════════════════════ */
+        (function () {
+            const preloader = document.getElementById('preloader');
+            const balloon = document.getElementById('balloon');
+            const balloonScene = document.getElementById('balloonScene');
+            const tapHint = document.getElementById('tapHint');
+            const preloaderTitle = document.getElementById('preloaderTitle');
+            const mainContent = document.getElementById('mainContent');
+            let popped = false;
+
+            const colors = ['#f0d080', '#a8c8ff', '#ffe4f0', '#c9a84c', '#4d87e8', '#ffffff', '#ff6b9d', '#00d4aa'];
+            const shapes = ['circle', 'square', 'triangle', 'star'];
+
+            function createPopParticle(x, y, type) {
+                const p = document.createElement('div');
+                p.className = 'pop-particle';
+                const size = Math.random() * 12 + 4;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = Math.random() * 300 + 100;
+                const dx = Math.cos(angle) * velocity;
+                const dy = Math.sin(angle) * velocity - 150;
+                const rotation = Math.random() * 720 - 360;
+                const duration = Math.random() * 0.8 + 0.6;
+
+                p.style.cssText = `left:${x}px;top:${y}px;width:${size}px;height:${size}px;background:${color};box-shadow:0 0 ${size}px ${color};`;
+
+                if (type === 'square') {
+                    p.style.borderRadius = '2px';
+                } else if (type === 'triangle') {
+                    p.style.cssText += 'width:0;height:0;background:transparent;border-left:' + (size / 2) + 'px solid transparent;border-right:' + (size / 2) + 'px solid transparent;border-bottom:' + size + 'px solid ' + color + ';box-shadow:0 0 ' + size + 'px ' + color;
+                } else if (type === 'star') {
+                    p.style.clipPath = 'polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)';
+                }
+
+                p.animate([
+                    { transform: 'translate(-50%,-50%) scale(1) rotate(0deg)', opacity: 1 },
+                    { transform: `translate(calc(-50% + ${dx}px),calc(-50% + ${dy}px)) scale(0) rotate(${rotation}deg)`, opacity: 0 }
+                ], { duration: duration * 1000, easing: 'cubic-bezier(0.25,0.46,0.45,0.94)', fill: 'forwards' });
+
+                balloonScene.appendChild(p);
+                setTimeout(() => p.remove(), duration * 1000);
+            }
+
+            function createGlitterBurst(x, y) {
+                for (let i = 0; i < 60; i++) {
                     setTimeout(() => {
-                        const p = document.createElement('div');
-                        p.className = 'confetti-piece';
-                        const c = colors[Math.floor(Math.random() * colors.length)];
-                        const angle = Math.random() * Math.PI * 2;
-                        const dist = 60 + Math.random() * 120;
-                        /* FIX: spawn from visual centre of the cake scene (50%, 45%) */
-                        p.style.cssText = `
-                            left:50%; top:45%;
-                            background:${c};
-                            --dx:${Math.cos(angle) * dist}px;
-                            --dy:${(Math.sin(angle) * dist) - 60}px;
-                            --dr:${Math.random() * 720 - 360}deg;
-                            animation-delay:${Math.random() * 0.5}s;
-                            animation-duration:${1.5 + Math.random()}s;
-                        `;
-                        container.appendChild(p);
-                        setTimeout(() => p.remove(), 3000);
-                    }, i * 40);
+                        createPopParticle(x, y, shapes[Math.floor(Math.random() * shapes.length)]);
+                    }, i * 8);
                 }
             }
 
-            setTimeout(spawnConfetti, 800);
+            function popBalloon(e) {
+                if (popped) return;
+                popped = true;
+                const rect = balloon.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                balloon.style.transition = 'transform 0.15s ease-out, opacity 0.1s ease-out';
+                balloon.style.transform = 'scale(1.4)';
+                balloon.style.opacity = '0';
+                tapHint.style.opacity = '0';
+                createGlitterBurst(centerX, centerY);
+                setTimeout(() => preloaderTitle.classList.add('show'), 300);
+                setTimeout(() => {
+                    preloader.classList.add('done');
+                    mainContent.classList.add('show');
+                    loadHeroImage();
+                }, 2800);
+            }
 
-            setTimeout(() => {
-                const preloader = document.getElementById('preloader');
-                const main = document.getElementById('mainContent');
-                preloader.classList.add('fade-out');
-                main.classList.add('show');
-                setTimeout(() => preloader.style.display = 'none', 1100);
-            }, 4800);
+            balloon.addEventListener('click', popBalloon);
+            balloon.addEventListener('touchstart', (e) => { e.preventDefault(); popBalloon(e); });
+            setTimeout(() => { if (!popped) { const rect = balloon.getBoundingClientRect(); popBalloon({ clientX: rect.left + rect.width / 2, clientY: rect.top + rect.height / 2 }); } }, 8000);
         })();
 
-        /* ── STAR CANVAS ── */
+        function loadHeroImage() {
+            const heroBg = document.getElementById('heroBg');
+            const img = new Image();
+            img.src = 'images/ore.jpeg';
+            img.onload = () => heroBg.classList.add('has-image');
+        }
+
+        /* STAR CANVAS */
         (function () {
             const canvas = document.getElementById('starsCanvas');
             const ctx = canvas.getContext('2d');
             let stars = [];
-
             function resize() {
                 canvas.width = canvas.offsetWidth;
                 canvas.height = canvas.offsetHeight;
                 stars = [];
-                for (let i = 0; i < 200; i++) {
-                    stars.push({
-                        x: Math.random() * canvas.width,
-                        y: Math.random() * canvas.height,
-                        r: Math.random() * 1.6 + 0.3,
-                        a: Math.random(),
-                        speed: Math.random() * 0.008 + 0.003
-                    });
+                const count = window.innerWidth < 768 ? 80 : 200;
+                for (let i = 0; i < count; i++) {
+                    stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, r: Math.random() * 1.6 + 0.3, a: Math.random(), speed: Math.random() * 0.008 + 0.003 });
                 }
             }
-
             function draw() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-                stars.forEach(s => {
-                    s.a += s.speed;
-                    const alpha = (Math.sin(s.a) * 0.5 + 0.5) * 0.8 + 0.1;
-                    ctx.beginPath();
-                    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(168,200,255,${alpha})`;
-                    ctx.fill();
-                });
+                stars.forEach(s => { s.a += s.speed; const alpha = (Math.sin(s.a) * 0.5 + 0.5) * 0.8 + 0.1; ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2); ctx.fillStyle = `rgba(168,200,255,${alpha})`; ctx.fill(); });
                 requestAnimationFrame(draw);
             }
-
             resize();
             window.addEventListener('resize', resize);
             draw();
         })();
 
-        /* ── GLITTER CANVAS ── */
+        /* GLITTER CANVAS */
         (function () {
             const canvas = document.getElementById('glitterCanvas');
             const ctx = canvas.getContext('2d');
             let sparks = [];
-            const COLORS = [
-                'rgba(240,208,128,',
-                'rgba(168,200,255,',
-                'rgba(255,228,240,',
-                'rgba(201,168,76,',
-                'rgba(255,255,255,'
-            ];
-
-            function resize() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-
-            function spawn() {
-                sparks.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    r: Math.random() * 2 + 0.4,
-                    a: Math.random(),
-                    da: (Math.random() * 0.04 + 0.015) * (Math.random() < 0.5 ? 1 : -1),
-                    vx: (Math.random() - 0.5) * 0.35,
-                    vy: (Math.random() - 0.5) * 0.35,
-                    col: COLORS[Math.floor(Math.random() * COLORS.length)],
-                    life: 0,
-                    maxLife: 80 + Math.random() * 100
-                });
-            }
-
+            const COLORS = ['rgba(240,208,128,', 'rgba(168,200,255,', 'rgba(255,228,240,', 'rgba(201,168,76,', 'rgba(255,255,255,'];
+            function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+            function spawn() { sparks.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, r: Math.random() * 2 + 0.4, a: Math.random(), da: (Math.random() * 0.04 + 0.015) * (Math.random() < 0.5 ? 1 : -1), vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35, col: COLORS[Math.floor(Math.random() * COLORS.length)], life: 0, maxLife: 80 + Math.random() * 100 }); }
             function draw() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 for (let i = 0; i < 3; i++) spawn();
                 sparks = sparks.filter(s => s.life < s.maxLife);
-                sparks.forEach(s => {
-                    s.life++;
-                    s.x += s.vx;
-                    s.y += s.vy;
-                    s.a += s.da;
-                    const fade = Math.sin(s.life / s.maxLife * Math.PI);
-                    const alpha = fade * 0.85;
-                    ctx.save();
-                    ctx.translate(s.x, s.y);
-                    ctx.rotate(s.a);
-                    ctx.fillStyle = s.col + alpha + ')';
-                    ctx.beginPath();
-                    const r1 = s.r, r2 = s.r * 0.35;
-                    for (let j = 0; j < 8; j++) {
-                        const angle = (j * Math.PI) / 4;
-                        const rr = j % 2 === 0 ? r1 : r2;
-                        if (j === 0) ctx.moveTo(Math.cos(angle) * rr, Math.sin(angle) * rr);
-                        else ctx.lineTo(Math.cos(angle) * rr, Math.sin(angle) * rr);
-                    }
-                    ctx.closePath();
-                    ctx.fill();
-                    ctx.restore();
-                });
+                sparks.forEach(s => { s.life++; s.x += s.vx; s.y += s.vy; s.a += s.da; const fade = Math.sin(s.life / s.maxLife * Math.PI); const alpha = fade * 0.85; ctx.save(); ctx.translate(s.x, s.y); ctx.rotate(s.a); ctx.fillStyle = s.col + alpha + ')'; ctx.beginPath(); const r1 = s.r, r2 = s.r * 0.35; for (let j = 0; j < 8; j++) { const angle = (j * Math.PI) / 4; const rr = j % 2 === 0 ? r1 : r2; if (j === 0) ctx.moveTo(Math.cos(angle) * rr, Math.sin(angle) * rr); else ctx.lineTo(Math.cos(angle) * rr, Math.sin(angle) * rr); } ctx.closePath(); ctx.fill(); ctx.restore(); });
                 requestAnimationFrame(draw);
             }
-
             resize();
             window.addEventListener('resize', resize);
             draw();
         })();
 
-        /* ── FLOATING PARTICLES ── */
+        /* FLOATING PARTICLES */
         (function () {
             const container = document.getElementById('particles');
             const syms = ['💙', '✨', '🌙', '⭐', '💫', '🌸', '💎', '🌟'];
-
             function spawnParticle() {
                 const p = document.createElement('div');
                 p.className = 'particle';
@@ -1439,46 +1555,31 @@ Theme: Midnight Blue · Gold · Glitter
                 container.appendChild(p);
                 setTimeout(() => p.remove(), (dur + 3) * 1000);
             }
-
             for (let i = 0; i < 12; i++) setTimeout(spawnParticle, i * 600);
             setInterval(spawnParticle, 1800);
         })();
 
-        /* ── SCROLL REVEAL ── */
+        /* SCROLL REVEAL */
         (function () {
             const io = new IntersectionObserver(entries => {
-                entries.forEach(e => {
-                    if (e.isIntersecting) {
-                        e.target.classList.add('visible');
-                        io.unobserve(e.target);
-                    }
-                });
+                entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
             }, { threshold: 0.1 });
             document.querySelectorAll('.reveal').forEach(el => io.observe(el));
         })();
 
-        /* ── ALBUM TABS ── */
+        /* ALBUM TABS */
         (function () {
             const tabs = document.querySelectorAll('.album-tab');
             const pages = document.querySelectorAll('.album-page');
-
-            /* FIX: run entry animation on the initially-active page too */
             function animateFrames(page) {
                 page.querySelectorAll('.photo-frame').forEach((f, i) => {
                     f.style.opacity = '0';
                     f.style.transform = 'translateY(20px) scale(0.96)';
-                    setTimeout(() => {
-                        f.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
-                        f.style.opacity = '1';
-                        f.style.transform = 'translateY(0) scale(1)';
-                    }, i * 80);
+                    setTimeout(() => { f.style.transition = 'opacity 0.45s ease, transform 0.45s ease'; f.style.opacity = '1'; f.style.transform = 'translateY(0) scale(1)'; }, i * 80);
                 });
             }
-
-            /* animate the default active page on load */
             const defaultPage = document.querySelector('.album-page.active');
             if (defaultPage) animateFrames(defaultPage);
-
             tabs.forEach(tab => {
                 tab.addEventListener('click', () => {
                     const target = tab.dataset.album;
@@ -1490,6 +1591,21 @@ Theme: Midnight Blue · Gold · Glitter
                     if (page) { page.classList.add('active'); animateFrames(page); }
                 });
             });
+        })();
+
+        /* LIGHTBOX */
+        (function () {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const lightboxClose = document.getElementById('lightboxClose');
+            document.querySelectorAll('.photo-frame').forEach(frame => {
+                frame.addEventListener('click', () => {
+                    const src = frame.dataset.full;
+                    if (src) { lightboxImg.src = src; lightbox.classList.add('active'); }
+                });
+            });
+            lightboxClose.addEventListener('click', () => lightbox.classList.remove('active'));
+            lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.classList.remove('active'); });
         })();
     </script>
 </body>
